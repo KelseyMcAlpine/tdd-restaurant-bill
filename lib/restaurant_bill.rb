@@ -24,6 +24,7 @@ class RestaurantBill
   end
 
   def tip(percent)
+    raise ArgumentError.new "Your tip must be a positive percentage." if percent < 0
     @tip = bill_with_tax * (percent.to_f / 100)
     @final_bill += @tip
     return @final_bill
