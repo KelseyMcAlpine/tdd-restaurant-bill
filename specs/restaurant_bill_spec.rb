@@ -38,10 +38,16 @@ describe RestaurantBill do
     @my_bill.bill_with_tax.must_equal 32.7
   end
 
-  it "Should allow user to add a tip" dos
+  it "Should allow user to add a tip" do
     @my_bill.order_item("pizza", 10)
 
     @my_bill.tip(20).must_equal 13.08
+  end
+
+  it "Should raise an argument error if tip is not positive" do
+    @my_bill.order_item("pizza", 10)
+
+    proc {@my_bill.tip(-20)}.must_raise ArgumentError
   end
 
   it "Should return final bill" do
